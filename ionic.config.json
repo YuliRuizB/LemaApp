@@ -1,0 +1,7 @@
+{
+  "name": "LemaApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
