@@ -1,0 +1,43 @@
+<app-header title="Bienvenido a Lema"></app-header>
+<ion-content>
+  <div class="d-flex-center">
+    <form [formGroup]="form" (ngSubmit)="login()" class="auth-form" (keypress.enter)="login()">  
+      <app-logo></app-logo>
+      <app-custom-imput autocomplete="email" 
+      [control]="form.controls.email" 
+      type="email"
+      label="Correo"
+      icon="mail-outline"></app-custom-imput>
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div  *ngIf="form.controls.email.errors?.['required']">El email es requerido</div>
+        <div  *ngIf="form.controls.email.errors?.['email']">Ingrese un correo válido</div>
+
+      </div>
+      <app-custom-imput  
+       [control]="form.controls.password"
+       label="Password"
+       type="password"
+       icon="lock-closed-outline"></app-custom-imput>
+       <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div  *ngIf="form.controls.password.errors?.['required']">La Contraseña es requerida</div>      
+
+      </div>
+      <ion-text class="ion-text-center">
+        <h4 class="ion-margin ion-text-end" [routerLink]="['/login/forgot']" routerLinkActive="router-link-active">
+          ¿olvidaste tu contraseña?</h4>
+      </ion-text>      
+      
+      <ion-button expand="block" class="submit" mode="ios" type="submit"  [disabled]="form.invalid">
+        Entrar
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button> 
+    
+      <ion-button class="ion-margin-top" expand="block" fill="outline" mode="ios"  (click)="navigateToRegister()">
+        Completar Registro 
+      <ion-icon slot="end" name="person-add-outline"></ion-icon></ion-button>    
+    </form>
+  </div>
+ 
+  
+ 
+</ion-content>

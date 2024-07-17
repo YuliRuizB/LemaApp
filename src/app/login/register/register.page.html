@@ -1,0 +1,49 @@
+
+<app-header title="Registro"></app-header>
+<ion-content>
+  <form (ngSubmit)="register()">
+    <ion-item>
+      <ion-label>Para completar registro se requiere la siguiente información</ion-label>      
+    </ion-item>
+    <ion-item>
+      <ion-label>Clave</ion-label>
+      <ion-input [(ngModel)]="clave" name="clave" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Correo</ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="email" required></ion-input>
+    </ion-item>
+    <ion-button  expand="full" type="button" (click)="cargarData()">Cargar</ion-button>
+    <div *ngIf="showRegisterFields">
+       <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-input [(ngModel)]="name" name="name" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Apellido Paterno</ion-label>
+        <ion-input [(ngModel)]="apellidoPaterno" name="apellidoPaterno" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Apellido Materno</ion-label>
+        <ion-input [(ngModel)]="apellidoMaterno" name="apellidoMaterno" type="text" required></ion-input>
+      </ion-item>  
+      <ion-item>
+        <ion-label>Display Name</ion-label>
+        <ion-input [(ngModel)]="displayName" name="displayName" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Telefono</ion-label>
+        <ion-input [(ngModel)]="phone" name="phone" type="text" required></ion-input>
+      </ion-item> 
+      <ion-item>
+        <ion-label>Contraseña</ion-label>
+        <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Confirmar Contraseña</ion-label>
+        <ion-input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" required></ion-input>
+      </ion-item>
+      <ion-button expand="full" type="submit">Registrarse</ion-button>
+    </div>
+  </form>
+</ion-content>
