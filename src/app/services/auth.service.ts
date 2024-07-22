@@ -66,8 +66,38 @@ export class AuthService {
   }
 
 
-  register(user:any) { 
-
+  register(uid:string,user:any) { 
+    console.log("register");
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
+    const userData = {
+      uid:uid,
+      email: user.email,
+      active:user.active,
+      displayName: `${user.firstName} ${user.lastName}`,
+      secondLastName: user.secondLastName,
+      lastName: user.lastName,
+      name: user.name,
+      address:user.address,
+      city: user.city,
+      zipCode:user.zipCode,
+      colony:user.colony,
+      photoUrl: user.photoUrl || "",
+      state:user.state,
+      emailVerified: user.emailVerified || false,          
+      phone: user.phone,
+      refreshToken: '',    
+      dateOfBirth:user.dateOfBirth,           
+      customerId: user.customerId,   
+      terms: user.verifyTerms || false,		
+			status: 'completo',
+      street: user.street,
+      streetNumber:user.streetNumber,
+      related:user.related || "",
+			dateCreateUserFormat: moment().format('l'),
+			dateCreateUserFull: moment().format()		
+    }
+    console.log(userData);
+    return userRef.set(userData, {merge: true}); 
   }
   
   setUserData(user : any, result : any) {
@@ -92,7 +122,7 @@ export class AuthService {
       phone: user.phone,
       refreshToken: '',    
       fechaNacimiento:user.fechaNacimiento,           
-      claveCliente: user.claveCliente,   
+      customerId: user.customerId,   
       terms: user.verifyTerms,		
 			status: 'completo',
       municipio: user.municipio,

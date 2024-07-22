@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, UntypedFormGroup, FormControl } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-forgot',
@@ -9,17 +11,20 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./forgot.page.scss'],
 })
 export class ForgotPage implements OnInit {
-  resetPasswordForm: FormGroup;
+  form= new FormGroup ({
+    email: new FormControl('', [Validators.required , Validators.email])
+  
+  })
   loading = false;
+  firebaseData = inject(FirebaseService);
+  utlsData = inject(UtilsService);
   
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     public navController: NavController
   ) {
 
-      this.resetPasswordForm = this.fb.group({
-        email: ['', Validators.compose([Validators.required, Validators.email])]
-      });   
+     
   }   
 
   ngOnInit() {
@@ -27,18 +32,32 @@ export class ForgotPage implements OnInit {
   }
 
   sendPasswordResetEmail() {
-   /*  if(this.resetPasswordForm.valid) {
-      const data = this.resetPasswordForm.value;
-      this.authService.forgotPassword(data.email).then((response: any) => {
-        console.log(response);
-        this.toastService.presentToast('Te hemos enviado a tu cuenta de correo electrónico las instrucciones para recuperar tu contraseña.', 3000, 'success').then( () => {
-          setTimeout(() => {
-            this.navController.navigateBack('/login');
-          }, 3000);
-        })
-      })
-      .catch( (err: any) => this.toastService.presentToast(err, 3000, 'danger'))
-    } */
+    if(this.form.valid) {
+      const email = this.form.get('email')!.value!;
+
+     this.firebaseData.sendRecoveryEmail(email).then(res => {
+                
+      this.utlsData.presentToast({
+        message: `Correo enviado con éxito`,
+        duration: 1500,              
+        color: 'primary',
+        position: 'middle',
+        icon: 'mail-outline'
+      });
+
+      this.utlsData.routerLink('/login');
+      this.form.reset();
+      
+     })
+     .catch( (err: any) => 
+      this.utlsData.presentToast({
+        message: err.message,
+        duration: 1500,              
+        color: 'primary',
+        position: 'middle',
+        icon: 'alert-circle-outline'
+      }));   
+    } 
   }
 
   gotoSignin() {

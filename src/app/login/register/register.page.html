@@ -1,49 +1,66 @@
-
-<app-header title="Registro"></app-header>
+<app-header  buttonBack="/login" title="Registro"></app-header>
 <ion-content>
-  <form (ngSubmit)="register()">
-    <ion-item>
-      <ion-label>Para completar registro se requiere la siguiente información</ion-label>      
-    </ion-item>
-    <ion-item>
-      <ion-label>Clave</ion-label>
-      <ion-input [(ngModel)]="clave" name="clave" type="text" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Correo</ion-label>
-      <ion-input [(ngModel)]="email" name="email" type="email" required></ion-input>
-    </ion-item>
-    <ion-button  expand="full" type="button" (click)="cargarData()">Cargar</ion-button>
-    <div *ngIf="showRegisterFields">
-       <ion-item>
-        <ion-label>Nombre</ion-label>
-        <ion-input [(ngModel)]="name" name="name" type="text" required></ion-input>
-      </ion-item>
+  <div class="d-flex-center">
+    <form class="auth-form" [formGroup]="form" (keypress.enter)="register()" (ngSubmit)="register()">
       <ion-item>
-        <ion-label>Apellido Paterno</ion-label>
-        <ion-input [(ngModel)]="apellidoPaterno" name="apellidoPaterno" type="text" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Apellido Materno</ion-label>
-        <ion-input [(ngModel)]="apellidoMaterno" name="apellidoMaterno" type="text" required></ion-input>
-      </ion-item>  
-      <ion-item>
-        <ion-label>Display Name</ion-label>
-        <ion-input [(ngModel)]="displayName" name="displayName" type="text" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Telefono</ion-label>
-        <ion-input [(ngModel)]="phone" name="phone" type="text" required></ion-input>
-      </ion-item> 
-      <ion-item>
-        <ion-label>Contraseña</ion-label>
-        <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Confirmar Contraseña</ion-label>
-        <ion-input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" required></ion-input>
-      </ion-item>
-      <ion-button expand="full" type="submit">Registrarse</ion-button>
-    </div>
-  </form>
+        <ion-label>Para completar registro se requiere la siguiente información</ion-label>
+      </ion-item>     
+      <app-custom-imput [control]="form.controls.customerId" label="Clave" type="text"
+        icon="key-outline"></app-custom-imput>
+      <div class="validators" *ngIf="form.controls.customerId.errors && form.controls.customerId.touched">
+        <div *ngIf="form.controls.customerId.errors?.['required']">La Clave es requerida</div>
+      </div>
+      <app-custom-imput autocomplete="email" [control]="form.controls.email" type="email" label="Correo"
+        icon="mail-outline"></app-custom-imput>
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div *ngIf="form.controls.email.errors?.['required']">El email es requerido</div>
+        <div *ngIf="form.controls.email.errors?.['email']">Ingrese un correo válido</div>
+
+      </div>
+      <ion-button expand="block" class="submit" mode="ios" type="button" (click)="cargarData()">Cargar</ion-button>
+      <div *ngIf="showRegisterFields">
+        <app-custom-imput [control]="form.controls.name" label="Nombre" type="text"
+          icon="person-outline"></app-custom-imput>
+        <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
+          <div *ngIf="form.controls.name.errors?.['required']">El Nombre es requerid</div>
+        </div>
+        <app-custom-imput [control]="form.controls.lastName" label="Apellido Paterno" type="text"
+          icon="person-outline"></app-custom-imput>
+        <div class="validators" *ngIf="form.controls.lastName.errors && form.controls.lastName.touched">
+          <div *ngIf="form.controls.lastName.errors?.['required']">El Apellido Paterno es requerido</div>
+        </div>
+        <app-custom-imput [control]="form.controls.secondLastName" label="Apellido Materno" type="text"
+          icon="person-outline"></app-custom-imput>
+        <div class="validators" *ngIf="form.controls.secondLastName.errors && form.controls.secondLastName.touched">
+          <div *ngIf="form.controls.secondLastName.errors?.['required']">El Apellido Materno es requerido</div>
+        </div>
+        <app-custom-imput [control]="form.controls.displayName" label="Display" type="text"
+          icon="accessibility-outline"></app-custom-imput>
+        <div class="validators" *ngIf="form.controls.displayName.errors && form.controls.displayName.touched">
+          <div *ngIf="form.controls.displayName.errors?.['required']">El valor inicial de display es requerido</div>
+        </div>
+        <app-custom-imput [control]="form.controls.phone" label="Teléfono" type="number"
+          icon="lock-closed-outline"></app-custom-imput>
+        <div class="validators" *ngIf="form.controls.phone.errors && form.controls.phone.touched">
+          <div *ngIf="form.controls.phone.errors?.['required']">El telefono es requerido</div>
+
+        </div>
+        <app-custom-imput [control]="form.controls.password" label="Password" type="password"
+          icon="lock-closed-outline"></app-custom-imput>
+        <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+          <div *ngIf="form.controls.password.errors?.['required']">La Contraseña es requerida</div>
+
+        </div>
+        <app-custom-imput [control]="form.controls.confirmPassword" label="Confirmar Contraseña" type="password"
+          icon="lock-closed-outline"></app-custom-imput>
+        <div class="validators" *ngIf="form.controls.confirmPassword.errors && form.controls.confirmPassword.touched">
+          <div *ngIf="form.controls.confirmPassword.errors?.['required']">La Contraseña es requerida</div>
+        </div>
+     
+      <ion-button type="submit" expand="block"  mode="ios">
+        Completar Registro
+      </ion-button>
+     </div>
+    </form>
+  </div>
 </ion-content>

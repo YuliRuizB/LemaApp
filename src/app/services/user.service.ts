@@ -16,10 +16,10 @@ import { map } from "rxjs/operators";
       }
     
 
-      getUserInfo(claveCliente:string , email:string){     
+      getUserInfo(customerId:string , email:string){     
         return this.afs.collection('users', (ref:any) => 
         ref
-        .where('claveCliente', '==', claveCliente)
+        .where('customerId', '==', customerId)
         .where('email', '==', email)
         ).snapshotChanges().pipe(
           map((actions:any) => actions.map((a:any) => {

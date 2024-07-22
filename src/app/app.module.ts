@@ -16,12 +16,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SharedModule } from './shared/shared.module';
+import { TimestampToDatePipe } from './services/timestamp-to-date.pipe';
+import { DetallePagoComponent } from './pagos/detalle-pago/detalle-pago.component';
 
 
 
 @NgModule({
   declarations: [
-     AppComponent],
+     AppComponent,
+     TimestampToDatePipe],
+     
   imports: [    
     BrowserModule, 
     IonicModule.forRoot({mode:'md'}),
@@ -34,7 +38,7 @@ import { SharedModule } from './shared/shared.module';
     AngularFireMessagingModule,
     CommonModule,   
     FormsModule,
-   SharedModule
+   SharedModule   
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

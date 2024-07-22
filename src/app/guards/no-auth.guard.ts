@@ -9,40 +9,25 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+
+export class NoAuthGuard implements CanActivate {
+constructor(private afAuth: AngularFireAuth, private router: Router) {}
   firebaseData = inject(FirebaseService);
   utlsData = inject(UtilsService);
 
   canActivate(route: ActivatedRouteSnapshot, 
     state: RouterStateSnapshot): Observable< boolean | UrlTree> | Promise <boolean |UrlTree > | boolean | UrlTree {
     
-    let user = localStorage.getItem('user');
-
+    
       return new Promise((resolve) => {
 
         this.firebaseData.getAut().onAuthStateChanged((auth)  => {
-          if (auth) {
-            if (user) resolve(true);
-          }
+          if (!auth)   resolve(true);
           else {
-            this.utlsData.routerLink('/login');
+            this.utlsData.routerLink('/home');
             resolve (false);
           }
         })
       })
   }
-
- /*  canActivate() {
-    return this.afAuth.authState.pipe(
-      map(user => {
-        if (user) {
-          return true;
-        } else {
-          this.router.navigate(['/login']);
-          return false;
-        }
-      })
-    );
-  } */
 }

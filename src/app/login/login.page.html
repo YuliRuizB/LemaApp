@@ -1,8 +1,16 @@
-<app-header title="Bienvenido a Lema"></app-header>
+<app-header  title="Bienvenido a Lema"></app-header>
 <ion-content>
   <div class="d-flex-center">
     <form [formGroup]="form" (ngSubmit)="login()" class="auth-form" (keypress.enter)="login()">  
       <app-logo></app-logo>
+      <app-custom-imput autocomplete="clave" 
+      [control]="form.controls.customerId" 
+      type="number"
+      label="Clave"
+      icon="key-outline"></app-custom-imput>
+      <div class="validators" *ngIf="form.controls.customerId.errors && form.controls.customerId.touched">
+        <div  *ngIf="form.controls.customerId.errors?.['required']">La Clave es requerida</div>
+      </div>
       <app-custom-imput autocomplete="email" 
       [control]="form.controls.email" 
       type="email"
