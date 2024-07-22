@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import { FirebaseService } from './services/firebase.service';
+import { UtilsService } from './services/utils.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,17 +17,20 @@ export class AppComponent {
     { title: 'Configuración', url: '/configuracion', icon: 'build' }, 
   ];
   showMenu = false;
+  firebaseData = inject(FirebaseService);
+  utlsData = inject(UtilsService);
 
  constructor(private router: Router, private platform: Platform) {
-    this.initializeApp();
+    this.initializeApp(); 
+  
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        console.log(event.url);
-        console.log( this.showMenu);
+       // console.log(event.url);
+        //console.log( this.showMenu);
         if (event.url !== "/"){
         this.showMenu = event.url !== '/login';
       }
-        console.log( this.showMenu);
+      //  console.log( this.showMenu);
 
       }
     });
@@ -35,5 +40,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // Perform any higher level native operations if needed
     });
+  }
+  singOut(){
+    this.firebaseData.signOut();
   }
 }

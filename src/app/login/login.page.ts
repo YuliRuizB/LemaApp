@@ -42,7 +42,7 @@ export class LoginComponent {
       const customerId = this.form.get('customerId')!.value!;
 
       this.firebaseData.singIn(this.form.value as User).then(res => {
-        console.log(res.user.uid);            
+     //   console.log(res.user.uid);            
         
       
         this.usersService.getUser(res.user.uid).subscribe((docSnapshot: any) => {

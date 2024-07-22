@@ -1,0 +1,36 @@
+
+.p-item {
+    --padding-top: 20px;
+
+    ion-avatar {
+        width: 70px;
+        height: 80px;
+        --border-radius: 15px;
+    }
+
+    .name {
+        font-weight: 600;
+        padding-bottom: 5px;
+    }
+
+    .data {
+        font-size: 13px;
+
+        strong {
+            font-weight: 500;
+        }
+    }
+
+    .option-btn {       
+        font-size: 27px;
+        width: 60px;
+        height: 100px;
+        background-color: cadetblue;
+    }
+
+    ion-chip {
+        font-size: 14px;
+        border-radius: 10px;
+        margin-left: 0;
+    }
+}

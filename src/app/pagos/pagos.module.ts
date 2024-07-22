@@ -8,6 +8,8 @@ import { PagosPageRoutingModule } from './pagos-routing.module';
 
 import { PagosPage } from './pagos.page';
 import { SharedModule } from '../shared/shared.module';
+import { TimestampToDatePipe } from '../services/timestamp-to-date.pipe';
+import { DetallePagoComponent } from './detalle-pago/detalle-pago.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     IonicModule,
     PagosPageRoutingModule,
     SharedModule
+     
   ],
-  declarations: [PagosPage]
+  declarations: [PagosPage, DetallePagoComponent ]
 })
 export class PagosPageModule {}
