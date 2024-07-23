@@ -18,7 +18,7 @@ export interface User {
     phone?:string;
     phone2?:string;
     phone3?:string;
-    photoUrl?:string;
+    photoURL:string;
     refreshToken?:string;
     related:string;
     secondLastName:string;

@@ -1,20 +1,46 @@
+  <ion-menu contentId="menu-content" menuId="menu-content" side="start" >
+      <app-header title="Menu">
+      </app-header>
+     <ion-content class="ion-text-center" >
+        <ion-avatar style="margin: 0 auto;">
+          <img *ngIf="user()?.photoURL" [src]="user().photoURL" />
+        </ion-avatar>       
+        <h4 *ngIf="user()?.displayName">{{ user().displayName }}</h4>
+       
+        <ion-list class="ion-content"  id="inbox-list">        
+          <ion-menu-toggle  class="ion-content" auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+      <ion-footer class="ion-no-border safe-p-bottom">
+        <ion-menu-toggle  class="ion-content" auto-hide="false" >
+          <ion-item (click)="singOut()" lines="none" >
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>Cerrar Sessión</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-footer>
+    </ion-menu>
+
+    <ion-router-outlet id="menu-content" main></ion-router-outlet>
+
+
+<!-- 
 
   <ion-split-pane *ngIf="showMenu" contentId="main-content">
     <ion-menu style="width: 254px; min-width: 254; outline: none;" contentId="main-content">
       <app-header title="Menu">
       </app-header>
-    <!--   <ion-header>
-        <ion-toolbar>
-          <ion-avatar>
-            <img  *ngIf="dataUser?.value.photoURL" [src]="dataUser?.value.photoURL" />
-          </ion-avatar>
-          <br>
-          <ion-icon class="image-icon" *ngIf="!dataUser?.value.photoURL" slot="start" name="image-outline"></ion-icon>
-          <ion-title>{{dataUser?.displayName}}</ion-title>
-          <ion-title size="small">{{dataUser?.email}}</ion-title>  
-        </ion-toolbar>
-      </ion-header>   -->
-      <ion-content >
+     <ion-content class="ion-text-center" >
+        <ion-avatar style="margin: 0 auto;">
+          <img [src]="user().photoURL" />
+        </ion-avatar>       
+          <h4>{{user().displayName}}</h4>
+       
         <ion-list class="ion-content"  id="inbox-list">        
           <ion-menu-toggle  class="ion-content" auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
@@ -37,5 +63,4 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 
-  <ion-router-outlet *ngIf="!showMenu" id="main-content"></ion-router-outlet>
-
+  <ion-router-outlet *ngIf="!showMenu" id="main-content"></ion-router-outlet> -->

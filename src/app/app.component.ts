@@ -3,6 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { FirebaseService } from './services/firebase.service';
 import { UtilsService } from './services/utils.service';
+import { User } from './models/user.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -41,6 +43,10 @@ export class AppComponent {
       // Perform any higher level native operations if needed
     });
   }
+  user():User {
+    return this.utlsData.getFromLocalStorage('user');
+  }
+
   singOut(){
     this.firebaseData.signOut();
   }

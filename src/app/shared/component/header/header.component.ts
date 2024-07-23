@@ -11,6 +11,7 @@ export class HeaderComponent  implements OnInit {
   @Input() title!:string;
   @Input() buttonBack!:string;
   @Input() ismodal!:boolean;
+  @Input() showMenu!:boolean;
 
   utlsData = inject(UtilsService);
 
