@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
   <ion-buttons slot="start">
     <ion-back-button *ngIf="buttonBack" [defaultHref]="buttonBack"></ion-back-button>
-    <ion-button   (click)="dismissModal()"  *ngIf="ismodal">
+    <ion-button *ngIf="ismodal" (click)="dismissModal()">
       <ion-icon name="close-circle-outline"></ion-icon>
     </ion-button>
 
@@ -12,8 +12,7 @@
   </ion-buttons>
    
     <ion-title>
-      <strong> {{title}}</strong>
-      <div class="admin">App</div>
+      <strong> {{title}}</strong>     
     </ion-title>
   </ion-toolbar>
 </ion-header>
